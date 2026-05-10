@@ -122,7 +122,7 @@ async function verifyController(req, res, next) {
       },
     })
 
-    // 2) ONE Gemini verification per batch (<=10), not per claim
+    // 2) ONE OpenRouter verification per batch (<=10), not per claim
     const verifications = await verifyAllClaims({ claims: list, sourcesByClaim, batchSize: 10 })
 
     const accuracy = computeAccuracy(verifications)

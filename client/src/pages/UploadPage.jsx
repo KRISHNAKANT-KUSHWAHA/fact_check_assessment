@@ -19,11 +19,26 @@ export function UploadPage() {
     return { name: file.name, sizeMb: (file.size / (1024 * 1024)).toFixed(2) }
   }, [file])
 
+  function clearPreviousResult() {
+    sessionStorage.removeItem('factcheck:lastResult')
+  }
+
+  function onSelectFile(nextFile) {
+    clearPreviousResult()
+    setFile(nextFile)
+  }
+
+  function onClearFile() {
+    clearPreviousResult()
+    setFile(null)
+  }
+
   async function onStart() {
     if (!file) {
       toast.error('Please select a PDF file.')
       return
     }
+    clearPreviousResult()
     setBusy(true)
     setProgress(5)
     setPhase('Uploading PDF…')
@@ -66,8 +81,8 @@ export function UploadPage() {
           <UploadDropzone
             disabled={busy}
             file={file}
-            onFile={(f) => setFile(f)}
-            onClear={() => setFile(null)}
+            onFile={onSelectFile}
+            onClear={onClearFile}
           />
 
           <div className="mt-5 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">

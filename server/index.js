@@ -16,14 +16,29 @@ const app = express()
 
 app.set('trust proxy', 1)
 
+function isAllowedOrigin(origin) {
+  if (!origin) return true
+
+  const allowed = (process.env.CLIENT_ORIGIN || '').split(',').map((s) => s.trim()).filter(Boolean)
+  if (!allowed.length || allowed.includes(origin)) return true
+
+  if (process.env.NODE_ENV !== 'production') {
+    try {
+      const url = new URL(origin)
+      if ((url.hostname === 'localhost' || url.hostname === '127.0.0.1') && /^51\d{2}$/.test(url.port)) {
+        return true
+      }
+    } catch (_) {}
+  }
+
+  return false
+}
+
 app.use(
   cors({
     origin: (origin, cb) => {
-      const allowed = (process.env.CLIENT_ORIGIN || '').split(',').map((s) => s.trim()).filter(Boolean)
-      if (!origin) return cb(null, true)
-      if (!allowed.length) return cb(null, true)
-      if (allowed.includes(origin)) return cb(null, true)
-      return cb(new Error('CORS blocked'), false)
+      if (isAllowedOrigin(origin)) return cb(null, true)
+      return cb(null, false)
     },
     credentials: true,
   }),

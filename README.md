@@ -7,8 +7,8 @@ Production-grade AI-powered fact-checking web app for PDFs:
 
 - **PDF upload**: drag & drop PDF upload with validation and progress
 - **PDF text extraction**: `pdf-parse` extracts raw text (stored temporarily)
-- **Claim extraction (Gemini)**: extracts checkable claims (stats, dates, technical, financial)
-- **Live verification (Tavily + Gemini)**: web search → verdict engine (VERIFIED / INACCURATE / FALSE)
+- **Claim extraction (OpenRouter)**: extracts checkable claims (stats, dates, technical, financial)
+- **Live verification (Tavily + OpenRouter)**: web search → verdict engine (VERIFIED / INACCURATE / FALSE)
 - **Results dashboard**: accuracy score + animated cards + sources + reasoning
 - **Exports**: download JSON + download PDF report (client-side PDF)
 - **Security**: `helmet`, strict file limits, CORS, basic rate limiting, centralized error handling
@@ -17,7 +17,7 @@ Production-grade AI-powered fact-checking web app for PDFs:
 
 - **Frontend**: React + Vite + TailwindCSS + Framer Motion + Axios + React Dropzone + Lucide + React Router
 - **Backend**: Node.js + Express
-- **AI**: Gemini API (`@google/generative-ai`)
+- **AI**: OpenRouter API
 - **Search**: Tavily Search API
 - **PDF**: `multer` + `pdf-parse`
 - **Deploy**: Render (API) + Vercel (Web)
@@ -41,7 +41,10 @@ Create and edit:
 - `server/.env`
 ```
 PORT=5000
-GEMINI_API_KEY=YOUR_GEMINI_KEY
+OPENROUTER_API_KEY=YOUR_OPENROUTER_KEY
+OPENROUTER_MODEL=openai/gpt-4o-mini
+OPENROUTER_SITE_URL=http://localhost:5173
+OPENROUTER_APP_NAME=AI Fact-Check Agent
 TAVILY_API_KEY=YOUR_TAVILY_KEY
 CLIENT_ORIGIN=http://localhost:5173
 ```
@@ -83,7 +86,10 @@ Open: `http://localhost:5173`
 1. Push this repo to GitHub.
 2. In Render: **New → Blueprint** and select the repository.
 3. Render will read `render.yaml`. Set environment variables:
-   - `GEMINI_API_KEY`
+   - `OPENROUTER_API_KEY`
+   - `OPENROUTER_MODEL`
+   - `OPENROUTER_SITE_URL`
+   - `OPENROUTER_APP_NAME`
    - `TAVILY_API_KEY`
    - `CLIENT_ORIGIN` (your Vercel URL, e.g. `https://your-app.vercel.app`)
 4. Deploy. Verify:

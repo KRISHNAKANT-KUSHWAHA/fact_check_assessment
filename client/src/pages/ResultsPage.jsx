@@ -12,7 +12,14 @@ import { computeAccuracy } from '../utils/scoring.js'
 export function ResultsPage() {
   const navigate = useNavigate()
   const raw = sessionStorage.getItem('factcheck:lastResult')
-  const result = raw ? JSON.parse(raw) : null
+  let result = null
+  if (raw) {
+    try {
+      result = JSON.parse(raw)
+    } catch (_) {
+      sessionStorage.removeItem('factcheck:lastResult')
+    }
+  }
 
   const summary = useMemo(() => {
     if (!result?.verifications?.length) return null
@@ -32,6 +39,11 @@ export function ResultsPage() {
     if (!result) return
     await generatePdfReport(result)
     toast.success('Downloaded PDF report.')
+  }
+
+  function onNewUpload() {
+    sessionStorage.removeItem('factcheck:lastResult')
+    navigate('/upload')
   }
 
   if (!result) {
@@ -72,7 +84,7 @@ export function ResultsPage() {
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
-            onClick={() => navigate('/upload')}
+            onClick={onNewUpload}
             className="inline-flex items-center gap-2 rounded-2xl px-4 py-2 glass text-white hover:bg-white/10 transition"
           >
             <RefreshCcw className="h-4 w-4" />

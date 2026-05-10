@@ -6,11 +6,11 @@ const tavilyLimiter = new Bottleneck({
   maxConcurrent: 1,
 })
 
-// Gemini: keep it very conservative to avoid spikes
-const geminiLimiter = new Bottleneck({
+// OpenRouter: keep it conservative to avoid spikes across routed providers
+const openRouterLimiter = new Bottleneck({
   minTime: 1200,
   maxConcurrent: 1,
 })
 
-module.exports = { tavilyLimiter, geminiLimiter }
+module.exports = { tavilyLimiter, openRouterLimiter }
 

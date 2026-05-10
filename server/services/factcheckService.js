@@ -1,4 +1,4 @@
-const { generateJson } = require('./geminiService')
+const { generateJson } = require('./openRouterService')
 const { processInBatches } = require('../utils/batchProcessor')
 const { localExtractClaims } = require('./localClaimExtractor')
 
@@ -75,7 +75,7 @@ Output STRICT JSON ARRAY (same order). Each element:
   )}`
 
   const json = await generateJson({ system, user })
-  if (!Array.isArray(json)) throw new Error('Gemini verification did not return a JSON array.')
+  if (!Array.isArray(json)) throw new Error('OpenRouter verification did not return a JSON array.')
   return json
 }
 
