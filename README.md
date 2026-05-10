@@ -1,5 +1,11 @@
 # AI Fact-Check Agent
 
+This project was developed as part of a placement assessment assignment from Cog Culture.
+
+The AI-powered Fact-Check Agent is a production-ready MERN stack web application that analyzes uploaded PDF documents, extracts factual claims, verifies them using live web data, and classifies them as Verified, Inaccurate, or False.
+
+The system leverages OpenRouter API-powered LLMs along with live web search integration to detect outdated statistics, hallucinated information, fake claims, and unsupported statements while also providing corrected facts, explanations, confidence scores, and source references.
+
 AI-powered PDF fact-checking app:
 1. Upload a PDF.
 2. Extract checkable factual claims.
