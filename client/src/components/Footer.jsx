@@ -4,7 +4,7 @@ export function Footer() {
       <div className="glass rounded-2xl px-4 py-4">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
           <div>
-            Built with React, Tailwind, Gemini, Tavily, Express.
+            {/* Built with React, Tailwind, openrouu, Tavily, Express. */}
           </div>
           <div className="text-zinc-500">
             © {new Date().getFullYear()} AI Fact-Check Agent
