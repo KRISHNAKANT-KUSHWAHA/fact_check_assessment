@@ -30,7 +30,7 @@ export function LandingPage() {
         <motion.div initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.08 } } }}>
           <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 glass text-xs text-zinc-200">
             <Sparkles className="h-4 w-4 text-violet-200" />
-            Gemini-powered claim extraction + verification
+            OpenAI-powered claim extraction + verification
           </motion.div>
 
           <motion.h1 variants={fadeUp} className="mt-4 text-4xl sm:text-5xl font-bold tracking-tight text-white">
